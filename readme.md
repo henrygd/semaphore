@@ -48,7 +48,7 @@ for (let i = 0; i < 5; i++) {
 }
 
 async function fetchPokemon(name) {
-    // get semaphore with key based on name arg
+    // get semaphore with key based on name
     const sem = getSemaphore(name)
     // acquire access from the semaphore
     await sem.acquire()
@@ -78,8 +78,8 @@ async function fetchPokemon(name) {
 /**
  * Creates or retrieves existing semaphore with optional key and concurrency level.
  *
- * @param {any} [key=Symbol()] - Key used to identify the semaphore. Defaults to `Symbol()`.
- * @param {number} [concurrency=1] - Maximum concurrent tasks allowed access. Defaults to `1`.
+ * key - Key used to identify the semaphore. Defaults to `Symbol()`.
+ * concurrency - Maximum concurrent tasks allowed access. Defaults to `1`.
  */
 function getSemaphore(key?: any, concurrency?: number): Semaphore
 
@@ -105,24 +105,45 @@ Concurrency is set for each semaphore on first creation via `getSemaphore`. If y
 
 ## Comparisons and benchmarks
 
-Comparison table with related libraries on NPM. Note that we're looking at libraries which provide an inline promise-based locking mechanism. Not callback libraries.
+Note that we're looking at libraries which provide a promise-based locking mechanism. Not callback libraries.
 
-| Library                                                                        | Version | Bundle size (B) | Keys | Weekly Downloads |
-| :----------------------------------------------------------------------------- | :------ | :-------------- | :--- | :--------------- |
-| @henrygd/semaphore                                                             | 0.0.1   | 267             | yes  | ¯\\\_(ツ)\_/¯    |
-| [async-mutex](https://www.npmjs.com/package/async-mutex)                       | 0.5.0   | 4,758           | no   | 1,639,071        |
-| [async-sema](https://www.npmjs.com/package/async-sema)                         | 3.1.1   | 3,532           | no   | 1,258,877        |
-| [await-semaphore](https://www.npmjs.com/package/await-semaphore)               | 0.1.3   | 1,184           | no   | 60,449           |
-| [@shopify/semaphore](https://www.npmjs.com/package/@shopify/semaphore)         | 3.1.0   | 604             | no   | 29,089           |
-| [async-await-mutex-lock](https://www.npmjs.com/package/async-await-mutex-lock) | 1.0.11  | 1,928           | yes  | 4,573            |
+| Library                                                                | Version | Bundle size (B) | Keys | Weekly Downloads |
+| :--------------------------------------------------------------------- | :------ | :-------------- | :--- | :--------------- |
+| @henrygd/semaphore                                                     | 0.0.1   | 267             | yes  | ¯\\\_(ツ)\_/¯    |
+| [async-mutex](https://www.npmjs.com/package/async-mutex)               | 0.5.0   | 4,758           | no   | 1,639,071        |
+| [async-sema](https://www.npmjs.com/package/async-sema)                 | 3.1.1   | 3,532           | no   | 1,258,877        |
+| [await-semaphore](https://www.npmjs.com/package/await-semaphore)       | 0.1.3   | 1,184           | no   | 60,449           |
+| [@shopify/semaphore](https://www.npmjs.com/package/@shopify/semaphore) | 3.1.0   | 604             | no   | 29,089           |
 
-## Benchmarks
+> If there's a library you'd like added to the table or benchmarks, please open an issue.
+
+### Note on benchmarks
+
+All libraries run the exact same test. Each operation sends 1,000 async functions through a binary semaphore to measure how quickly they pass through.
+
+## Browser benchmark
+
+Coming soon.
+
+## Node.js benchmark
+
+Coming soon.
+
+## Bun benchmark
+
+Coming soon.
+
+## Deno benchmark
+
+Coming soon.
+
+## Cloudflare workers benchmark
 
 Coming soon.
 
 ## Related
 
-[`@henrygd/semaphore`](https://github.com/henrygd/semaphore) - Tiny async queue with concurrency control. Like p-limit or fastq, but smaller and faster.
+[`@henrygd/queue`](https://github.com/henrygd/queue) - Tiny async queue with concurrency control. Like p-limit or fastq, but smaller and faster.
 
 ## License
 
