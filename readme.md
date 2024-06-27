@@ -6,7 +6,7 @@
 
 [![File Size][size-image]](https://github.com/henrygd/semaphore/blob/main/dist/index.min.js) [![MIT license][license-image]][license-url] [![JSR Score 100%](https://jsr.io/badges/@henrygd/semaphore/score)](https://jsr.io/@henrygd/semaphore)
 
-The fastest inline semaphores and mutexes in javascript. See [comparisons and benchmarks](#comparisons-and-benchmarks) below.
+The fastest javascript inline semaphores and mutexes. See [comparisons and benchmarks](#comparisons-and-benchmarks).
 
 A semaphore is used to control access to a shared resource among multiple async tasks. For example: writing to a cache / database / file. It can also be used more generally to limit the number of concurrent executions of async jobs.
 
@@ -119,27 +119,23 @@ Note that we're looking at libraries which provide a promise-based locking mecha
 
 ### Note on benchmarks
 
-All libraries run the exact same test. Each operation sends 1,000 async functions through a binary semaphore to measure how quickly they pass through.
+All libraries run the same test. Each operation sends 1,000 async functions to a binary semaphore to measure how quickly they pass through.
 
 ## Browser benchmark
 
-Coming soon.
+Coming shortly.
 
 ## Node.js benchmark
 
-Coming soon.
+![@henrygd/queue - 1.65x faster than async-sema. 2.62x async-mutex. 3.01x async-semaphore. 3.37x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/node-bench.png)
 
 ## Bun benchmark
 
-Coming soon.
+![@henrygd/queue - 1.95x faster than async-semaphore 2.56x asynsc-mutex. 2.62x async-sema. 3.7x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/bun.png)
 
 ## Deno benchmark
 
-Coming soon.
-
-## Cloudflare workers benchmark
-
-Coming soon.
+![@henrygd/queue - 1.69x faster than async-sema. 2.61x async-semaphore. 2.75x async-mutex. 3.6x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/deno.png)
 
 ## Related
 
