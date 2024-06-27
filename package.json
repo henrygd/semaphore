@@ -1,56 +1,55 @@
 {
-	"name": "@henrygd/semaphore",
-	"version": "0.0.1-rc.1",
-	"license": "MIT",
-	"type": "module",
-	"description": "The fastest inline semaphores and mutexes in javascript.",
-	"author": "Hank Dollman <hank@henrygd.me> (https://henrygd.me)",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/henrygd/semaphore.git"
-	},
-	"bugs": {
-		"url": "https://github.com/henrygd/semaphore/issues"
-	},
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs",
-			"types": "./dist/index.d.ts"
-		}
-	},
-	"types": "./dist/index.d.ts",
-	"scripts": {
-		"build": "bun run build.ts && ls -l dist/index.min.js && bun run generate-types",
-		"build:skip-types": "bun run build.ts && ls -l dist/index.min.js",
-		"generate-types": "tsc -d index.ts --outDir dist --emitDeclarationOnly > /dev/null",
-		"test": "bun run test:dev && bun test:dist",
-		"test:dev": "bun test test/bun.test.ts",
-		"test:dist": "DIST=true bun test test/bun.test.ts",
-		"test:deno": "bun run test:deno:dev && bun run test:deno:dist",
-		"test:deno:dist": "DIST=true deno test test/deno.test.ts --allow-env",
-		"test:deno:dev": "deno test test/deno.test.ts --allow-env",
-		"bench": "node bench/bench.js",
-		"bench:bun": "bun run bench/bench.js",
-		"bench:deno": "deno run --allow-env --allow-hrtime --allow-sys bench/bench.js"
-	},
-	"keywords": [
-		"mutex",
-		"semaphore",
-		"lock",
-		"async",
-		"await",
-		"concurrency"
-	],
-	"devDependencies": {
-		"@shopify/semaphore": "^3.1.0",
-		"@types/bun": "^1.1.5",
-		"async-await-mutex-lock": "^1.0.11",
-		"async-mutex": "^0.5.0",
-		"async-sema": "^3.1.1",
-		"await-semaphore": "^0.1.3",
-		"esbuild": "^0.21.5",
-		"mitata": "^0.1.11",
-		"typescript": "^5.5.2"
-	}
+  "name": "@henrygd/semaphore",
+  "version": "0.0.1-rc.1",
+  "license": "MIT",
+  "type": "module",
+  "description": "The fastest inline semaphores and mutexes in javascript.",
+  "author": "Hank Dollman <hank@henrygd.me> (https://henrygd.me)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henrygd/semaphore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/henrygd/semaphore/issues"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "bun run build.ts && ls -l dist/index.min.js && bun run generate-types",
+    "build:skip-types": "bun run build.ts && ls -l dist/index.min.js",
+    "generate-types": "tsc -d index.ts --outDir dist --emitDeclarationOnly > /dev/null",
+    "test": "bun run test:dev && bun test:dist",
+    "test:dev": "bun test test/bun.test.ts",
+    "test:dist": "DIST=true bun test test/bun.test.ts",
+    "test:deno": "bun run test:deno:dev && bun run test:deno:dist",
+    "test:deno:dist": "DIST=true deno test test/deno.test.ts --allow-env",
+    "test:deno:dev": "deno test test/deno.test.ts --allow-env",
+    "bench": "node bench/bench.js",
+    "bench:bun": "bun run bench/bench.js",
+    "bench:deno": "deno run --allow-env --allow-hrtime --allow-sys bench/bench.js"
+  },
+  "keywords": [
+    "mutex",
+    "semaphore",
+    "lock",
+    "async",
+    "await",
+    "concurrency"
+  ],
+  "devDependencies": {
+    "@shopify/semaphore": "^3.1.0",
+    "@types/bun": "^1.1.5",
+    "async-mutex": "^0.5.0",
+    "async-sema": "^3.1.1",
+    "await-semaphore": "^0.1.3",
+    "esbuild": "^0.21.5",
+    "mitata": "^0.1.11",
+    "typescript": "^5.5.2"
+  }
 }

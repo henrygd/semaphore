@@ -3,17 +3,16 @@ import { getSemaphore } from '../dist/index.min.js'
 import { Semaphore as AsyncSemaphore } from 'async-mutex'
 import { Mutex } from 'await-semaphore'
 import { Sema } from 'async-sema'
-import { Lock } from 'async-await-mutex-lock'
 import { Semaphore } from '@shopify/semaphore'
 
-let loops = 1_000
+const loops = 1_000
+const concurrency = 1
 
-const semaphore = getSemaphore()
-const asyncSemaphore = new AsyncSemaphore(1)
-const lock = new Lock()
-const shopifySemaphore = new Semaphore(1)
+const semaphore = getSemaphore(concurrency)
+const asyncSemaphore = new AsyncSemaphore(concurrency)
+const shopifySemaphore = new Semaphore(concurrency)
 const asMutex = new Mutex()
-const s = new Sema(1, {
+const s = new Sema(concurrency, {
 	capacity: loops, // Prealloc space for [loops] tokens
 })
 
@@ -36,19 +35,6 @@ baseline('@henrygd/semaphore', async () => {
 	checkEqual(j, loops)
 })
 
-bench('async-await-mutex-lock', async () => {
-	let j = 0
-	const { promise, resolve } = Promise.withResolvers()
-	for (let i = 0; i < loops; i++) {
-		lock.acquire().then(() => {
-			++j === loops && resolve()
-			lock.release()
-		})
-	}
-	await promise
-	checkEqual(j, loops)
-})
-
 bench('vercel/async-sema', async () => {
 	let j = 0
 	const { promise, resolve } = Promise.withResolvers()
@@ -62,11 +48,11 @@ bench('vercel/async-sema', async () => {
 	checkEqual(j, loops)
 })
 
-bench('await-semaphore', async () => {
+bench('async-mutex', async () => {
 	let j = 0
 	const { promise, resolve } = Promise.withResolvers()
 	for (let i = 0; i < loops; i++) {
-		asMutex.acquire().then((release) => {
+		asyncSemaphore.acquire().then(([_, release]) => {
 			++j === loops && resolve()
 			release()
 		})
@@ -75,11 +61,11 @@ bench('await-semaphore', async () => {
 	checkEqual(j, loops)
 })
 
-bench('async-mutex', async () => {
+bench('await-semaphore', async () => {
 	let j = 0
 	const { promise, resolve } = Promise.withResolvers()
 	for (let i = 0; i < loops; i++) {
-		asyncSemaphore.acquire().then(([_, release]) => {
+		asMutex.acquire().then((release) => {
 			++j === loops && resolve()
 			release()
 		})
