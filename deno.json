@@ -1,0 +1,9 @@
+{
+	"name": "@henrygd/semaphore",
+	"version": "0.0.1-rc.1",
+	"exports": "./index.ts",
+	"lint": {
+		"exclude": ["*"],
+		"include": ["test/deno.test.ts"]
+	}
+}

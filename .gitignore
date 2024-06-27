@@ -1,0 +1,9 @@
+node_modules
+.idea.md
+*.gz
+*.bak
+jsr.json
+deno.lock
+.vscode
+bun.lockb
+playground.ts
