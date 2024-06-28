@@ -1,5 +1,5 @@
 [size-image]: https://img.shields.io/github/size/henrygd/semaphore/dist/index.min.js?style=flat
-[license-image]: https://img.shields.io/github/license/henrygd/bigger-picture?style=flat&color=%2349ac0c
+[license-image]: https://img.shields.io/github/license/henrygd/semaphore?style=flat&color=%2349ac0c
 [license-url]: /LICENSE
 
 # @henrygd/semaphore
