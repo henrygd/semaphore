@@ -8,7 +8,7 @@
 
 The fastest javascript inline semaphores and mutexes. See [comparisons and benchmarks](#comparisons-and-benchmarks).
 
-A semaphore is used to control access to a shared resource among multiple async tasks. For example: writing to a cache / database / file. It can also be used more generally to limit the number of concurrent executions of async jobs.
+A semaphore is used to control access to shared code and resources among multiple concurrent async tasks.
 
 Works with: <img alt="browsers" title="This package works with browsers." height="16px" src="https://jsr.io/logos/browsers.svg" /> <img alt="Deno" title="This package works with Deno." height="16px" src="https://jsr.io/logos/deno.svg" /> <img alt="Node.js" title="This package works with Node.js" height="16px" src="https://jsr.io/logos/node.svg" /> <img alt="Cloudflare Workers" title="This package works with Cloudflare Workers." height="16px" src="https://jsr.io/logos/cloudflare-workers.svg" /> <img alt="Bun" title="This package works with Bun." height="16px" src="https://jsr.io/logos/bun.svg" />
 
@@ -30,11 +30,11 @@ sem.release()
 
 ## Example
 
-In this example, we'll use semaphores to prevent multiple requests to an API for the same resource.
+We use semaphores here to prevent multiple requests to an API for the same resource.
 
-The first calls to `fetchPokemon` will acquire access to the protected code. Subsequent calls will wait for the first to finish, then return the data from the cache.
+The first calls to `fetchPokemon` will acquire access to the protected code. Subsequent calls will wait, then return the data from the cache.
 
-We use a key to allow access based on the pokemon name. This allows immediate access to both `ditto` and `snorlax`, while queueing subsequent calls for the same name.
+We use a key to allow access based on the name. This lets `ditto` and `snorlax` run simultaneously.
 
 <!-- prettier-ignore -->
 ```js
