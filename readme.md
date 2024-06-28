@@ -117,23 +117,29 @@ Note that we're looking at libraries which provide a promise-based locking mecha
 
 > If there's a library you'd like added to the table or benchmarks, please open an issue.
 
-### Note on benchmarks
+## Benchmarks
 
 All libraries run the same test. Each operation sends 1,000 async functions to a binary semaphore to measure how quickly they pass through.
 
-## Browser benchmark
+### Browser benchmark
 
-Coming shortly.
+This test was run in Chromium. Chrome and Edge are the same. Safari is more lopsided with Vercel's `async-sema` dropping to third. Firefox, though I love and appreciate it, seems to be hard capped by slow promise handling, with `async-mutex` not far behind.
 
-## Node.js benchmark
+You can run or tweak for yourself here: https://jsbm.dev/8bBxR1pBLw0TM
+
+![@henrygd/queue - 13,665 Ops/s. fastq - 7,661 Ops/s. promise-queue - 7,650 Ops/s. async.queue - 4,060 Ops/s. p-limit - 1,067 Ops/s. queue - 721 Ops/s](https://henrygd-assets.b-cdn.net/semaphore/browser.png)
+
+> Note: `await-semaphore` is extremely slow for some reason and I didn't want to include it in the screenshot because it seems excessive. Not sure what's happening there.
+
+### Node.js benchmark
 
 ![@henrygd/queue - 1.65x faster than async-sema. 2.62x async-mutex. 3.01x async-semaphore. 3.37x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/node-bench.png)
 
-## Bun benchmark
+### Bun benchmark
 
 ![@henrygd/queue - 1.95x faster than async-semaphore 2.56x asynsc-mutex. 2.62x async-sema. 3.7x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/bun.png)
 
-## Deno benchmark
+### Deno benchmark
 
 ![@henrygd/queue - 1.69x faster than async-sema. 2.61x async-semaphore. 2.75x async-mutex. 3.6x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/deno.png)
 
