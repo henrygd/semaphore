@@ -4,7 +4,7 @@
 
 # @henrygd/semaphore
 
-[![File Size][size-image]](https://github.com/henrygd/semaphore/blob/main/dist/index.min.js) [![MIT license][license-image]][license-url] [![JSR Score 100%](https://jsr.io/badges/@henrygd/semaphore/score)](https://jsr.io/@henrygd/semaphore)
+[![File Size][size-image]](https://github.com/henrygd/semaphore/blob/main/dist/index.min.js) [![MIT license][license-image]][license-url] [![JSR Score 100%](https://jsr.io/badges/@henrygd/semaphore/score?v1)](https://jsr.io/@henrygd/semaphore)
 
 The fastest javascript inline semaphores and mutexes. See [comparisons and benchmarks](#comparisons-and-benchmarks).
 
