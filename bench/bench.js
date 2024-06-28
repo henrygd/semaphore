@@ -1,7 +1,7 @@
 import { run, bench, baseline } from 'mitata'
 import { getSemaphore } from '../dist/index.min.js'
 import { Semaphore as AsyncSemaphore } from 'async-mutex'
-import { Mutex } from 'await-semaphore'
+import { Semaphore as asSemaphore } from 'await-semaphore'
 import { Sema } from 'async-sema'
 import { Semaphore } from '@shopify/semaphore'
 
@@ -11,7 +11,7 @@ const concurrency = 1
 const semaphore = getSemaphore(concurrency)
 const asyncSemaphore = new AsyncSemaphore(concurrency)
 const shopifySemaphore = new Semaphore(concurrency)
-const asMutex = new Mutex()
+const asSem = new asSemaphore(concurrency)
 const s = new Sema(concurrency, {
 	capacity: loops, // Prealloc space for [loops] tokens
 })
@@ -52,9 +52,9 @@ bench('async-mutex', async () => {
 	let j = 0
 	const { promise, resolve } = Promise.withResolvers()
 	for (let i = 0; i < loops; i++) {
-		asyncSemaphore.acquire().then(([_, release]) => {
+		asyncSemaphore.acquire().then(() => {
 			++j === loops && resolve()
-			release()
+			asyncSemaphore.release()
 		})
 	}
 	await promise
@@ -65,7 +65,7 @@ bench('await-semaphore', async () => {
 	let j = 0
 	const { promise, resolve } = Promise.withResolvers()
 	for (let i = 0; i < loops; i++) {
-		asMutex.acquire().then((release) => {
+		asSem.acquire().then((release) => {
 			++j === loops && resolve()
 			release()
 		})
