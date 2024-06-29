@@ -8,13 +8,13 @@
 
 The fastest javascript inline semaphores and mutexes. See [comparisons and benchmarks](#comparisons-and-benchmarks).
 
-A semaphore is used to control access to shared code and resources among multiple concurrent async tasks.
+Semaphores limit simultaneous access to code and resources (e.g. a file) among multiple concurrent tasks.
 
 Works with: <img alt="browsers" title="This package works with browsers." height="16px" src="https://jsr.io/logos/browsers.svg" /> <img alt="Deno" title="This package works with Deno." height="16px" src="https://jsr.io/logos/deno.svg" /> <img alt="Node.js" title="This package works with Node.js" height="16px" src="https://jsr.io/logos/node.svg" /> <img alt="Cloudflare Workers" title="This package works with Cloudflare Workers." height="16px" src="https://jsr.io/logos/cloudflare-workers.svg" /> <img alt="Bun" title="This package works with Bun." height="16px" src="https://jsr.io/logos/bun.svg" />
 
 ## Usage
 
-Create or retrieve a semaphore by calling the `getSemaphore` function with optional key and maximum concurrency.
+Create or retrieve a semaphore by calling `getSemaphore` with optional key and concurrency limit.
 
 ```js
 const sem = getSemaphore('key', 1)
@@ -28,7 +28,7 @@ await sem.acquire()
 sem.release()
 ```
 
-## Example
+## Full example
 
 We use semaphores here to prevent multiple requests to an API for the same resource.
 
@@ -101,11 +101,11 @@ If you need to reuse the same semaphore even after deletion from the `Map`, use 
 
 ### Concurrency
 
-Concurrency is set for each semaphore on first creation via `getSemaphore`. If you call `getSemaphore` again with the key for an active semaphore, the concurrency argument is ignored and the existing semaphore is returned.
+Concurrency is set for each semaphore on first creation via `getSemaphore`. If called again using the key for an active semaphore, the concurrency argument is ignored and the existing semaphore is returned.
 
 ## Comparisons and benchmarks
 
-Note that we're looking at libraries which provide a promise-based locking mechanism. Not callback libraries.
+Note that we're looking at libraries which provide a promise-based locking mechanism, not callbacks.
 
 | Library                                                                | Version | Bundle size (B) | Keys | Weekly Downloads |
 | :--------------------------------------------------------------------- | :------ | :-------------- | :--- | :--------------- |
@@ -119,17 +119,17 @@ Note that we're looking at libraries which provide a promise-based locking mecha
 
 ## Benchmarks
 
-All libraries run the same test. Each operation sends 1,000 async functions to a binary semaphore to measure how quickly they pass through.
+All libraries run the same test. Each operation measures how long it takes a binary semaphore with 1,000 queued `acquire` requests to allow and release all requests.
 
 ### Browser benchmark
 
-This test was run in Chromium. Chrome and Edge are the same. Safari is more lopsided with Vercel's `async-sema` dropping to third. Firefox, though I love and appreciate it, seems to be hard capped by slow promise handling, with `async-mutex` not far behind.
+This test was run in Chromium. Chrome and Edge are the same. Safari is more lopsided with Vercel's `async-sema` dropping to third. Firefox, though I love and respect it, seems to be hard capped by slow promise handling, with `async-mutex` not far behind.
 
 You can run or tweak for yourself here: https://jsbm.dev/8bBxR1pBLw0TM
 
-![@henrygd/queue - 13,665 Ops/s. fastq - 7,661 Ops/s. promise-queue - 7,650 Ops/s. async.queue - 4,060 Ops/s. p-limit - 1,067 Ops/s. queue - 721 Ops/s](https://henrygd-assets.b-cdn.net/semaphore/browser.png)
+![@henrygd/queue - 13,665 Ops/s. async-sema - 8,077 Ops/s. async-mutex - 5,576 Ops/s. @shopify/semaphore - 4,099 Ops/s.](https://henrygd-assets.b-cdn.net/semaphore/browser.png)
 
-> Note: `await-semaphore` is extremely slow for some reason and I didn't want to include it in the screenshot because it seems excessive. Not sure what's happening there.
+> Note: `await-semaphore` is extremely slow for some reason and I didn't want to include it in the image because it seems excessive. Not sure what's happening there.
 
 ### Node.js benchmark
 
