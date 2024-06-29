@@ -143,6 +143,22 @@ You can run or tweak for yourself here: https://jsbm.dev/8bBxR1pBLw0TM
 
 ![@henrygd/queue - 1.69x faster than async-sema. 2.61x async-semaphore. 2.75x async-mutex. 3.6x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/deno.png)
 
+### Cloudflare Workers benchmark
+
+Uses [oha](https://github.com/hatoo/oha) to make 1,000 requests to each worker. Each request creates a semaphore and resolves 5,000 acquisitions / releases.
+
+This was run locally using [Wrangler](https://developers.cloudflare.com/workers/get-started/guide/). Wrangler uses the same [workerd](https://github.com/cloudflare/workerd) runtime as workers deployed to Cloudflare, so the relative difference should be accurate. Here's the [repo for this benchmark](https://github.com/henrygd/semaphore-wrangler-benchmark).
+
+| Library                                                                | Requests/sec | Total (sec) | Average | Slowest |
+| :--------------------------------------------------------------------- | :----------- | :---------- | :------ | :------ |
+| [@henrygd/semaphore](https://github.com/henrygd/semaphore)             | 941.8135     | 1.0618      | 0.0521  | 0.0788  |
+| [async-mutex](https://www.npmjs.com/package/async-mutex)               | 569.5130     | 1.7559      | 0.0862  | 0.1251  |
+| [async-sema](https://www.npmjs.com/package/async-sema)                 | 375.7332     | 2.6615      | 0.1308  | 0.1818  |
+| [@shopify/semaphore](https://www.npmjs.com/package/@shopify/semaphore) | 167.8239     | 5.9586      | 0.2925  | 0.4063  |
+| [await-semaphore](https://www.npmjs.com/package/await-semaphore)\*     | n/a          | n/a         | n/a     | n/a     |
+
+> \* `await-semaphore` does not work with concurrent requests.
+
 ## Related
 
 [`@henrygd/queue`](https://github.com/henrygd/queue) - Tiny async queue with concurrency control. Like p-limit or fastq, but smaller and faster.
