@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"license": "MIT",
 	"type": "module",
-	"description": "The fastest javascript inline semaphores and mutexes.",
+	"description": "Fast inline semaphores and mutexes",
 	"author": "Hank Dollman <hank@henrygd.me> (https://henrygd.me)",
 	"repository": {
 		"type": "git",
@@ -40,7 +40,8 @@
 		"lock",
 		"async",
 		"await",
-		"concurrency"
+		"concurrency",
+		"promise"
 	],
 	"devDependencies": {
 		"@shopify/semaphore": "^3.1.0",

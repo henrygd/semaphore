@@ -6,7 +6,7 @@
 
 [![File Size][size-image]](https://github.com/henrygd/semaphore/blob/main/dist/index.min.js) [![MIT license][license-image]][license-url] [![JSR Score 100%](https://jsr.io/badges/@henrygd/semaphore/score?v1)](https://jsr.io/@henrygd/semaphore)
 
-The fastest javascript inline semaphores and mutexes. See [comparisons and benchmarks](#comparisons-and-benchmarks).
+Fast inline semaphores and mutexes. See [comparisons and benchmarks](#comparisons-and-benchmarks).
 
 Semaphores limit simultaneous access to code and resources (e.g. a file) among multiple concurrent tasks.
 
@@ -133,15 +133,15 @@ You can run or tweak for yourself here: https://jsbm.dev/8bBxR1pBLw0TM
 
 ### Node.js benchmark
 
-![@henrygd/queue - 1.65x faster than async-sema. 2.62x async-mutex. 3.01x async-semaphore. 3.37x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/node-bench.png)
+![@henrygd/queue - 1.7x faster than async-sema. 2.66x async-mutex. 3.08x async-semaphore. 3.47x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/node.png)
 
 ### Bun benchmark
 
-![@henrygd/queue - 1.95x faster than async-semaphore 2.56x asynsc-mutex. 2.62x async-sema. 3.7x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/bun.png)
+![@henrygd/queue - 2x faster than async-semaphore 2.63x asynsc-mutex. 2.68x async-sema. 3.77x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/bun-bench.png)
 
 ### Deno benchmark
 
-![@henrygd/queue - 1.69x faster than async-sema. 2.61x async-semaphore. 2.75x async-mutex. 3.6x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/deno.png)
+![@henrygd/queue - 1.7x faster than async-sema. 2.7x async-mutex. 2.72x await-semaphore. 4.01x @shopify/semaphore.](https://henrygd-assets.b-cdn.net/semaphore/deno-bench.png)
 
 ### Cloudflare Workers benchmark
 
@@ -149,13 +149,13 @@ Uses [oha](https://github.com/hatoo/oha) to make 1,000 requests to each worker. 
 
 This was run locally using [Wrangler](https://developers.cloudflare.com/workers/get-started/guide/). Wrangler uses the same [workerd](https://github.com/cloudflare/workerd) runtime as workers deployed to Cloudflare, so the relative difference should be accurate. Here's the [repo for this benchmark](https://github.com/henrygd/semaphore-wrangler-benchmark).
 
-| Library                                                                | Requests/sec | Total (sec) | Average | Slowest |
-| :--------------------------------------------------------------------- | :----------- | :---------- | :------ | :------ |
-| [@henrygd/semaphore](https://github.com/henrygd/semaphore)             | 941.8135     | 1.0618      | 0.0521  | 0.0788  |
-| [async-mutex](https://www.npmjs.com/package/async-mutex)               | 569.5130     | 1.7559      | 0.0862  | 0.1251  |
-| [async-sema](https://www.npmjs.com/package/async-sema)                 | 375.7332     | 2.6615      | 0.1308  | 0.1818  |
-| [@shopify/semaphore](https://www.npmjs.com/package/@shopify/semaphore) | 167.8239     | 5.9586      | 0.2925  | 0.4063  |
-| [await-semaphore](https://www.npmjs.com/package/await-semaphore)\*     | n/a          | n/a         | n/a     | n/a     |
+| Library            | Requests/sec | Total (sec) | Average | Slowest |
+| :----------------- | :----------- | :---------- | :------ | :------ |
+| @henrygd/semaphore | 941.8135     | 1.0618      | 0.0521  | 0.0788  |
+| async-mutex        | 569.5130     | 1.7559      | 0.0862  | 0.1251  |
+| async-sema         | 375.7332     | 2.6615      | 0.1308  | 0.1818  |
+| @shopify/semaphore | 167.8239     | 5.9586      | 0.2925  | 0.4063  |
+| await-semaphore\*  | n/a          | n/a         | n/a     | n/a     |
 
 > \* `await-semaphore` does not work with concurrent requests.
 
