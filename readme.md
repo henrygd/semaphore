@@ -97,7 +97,7 @@ interface Semaphore {
 
 Keyed semaphores are held in a `Map` and deleted from the `Map` once they've been acquired and fully released (no waiting tasks).
 
-If you need to reuse the same semaphore even after deletion from the `Map`, use an persistent variable instead of calling `getSemaphore` again.
+If you need to reuse the same semaphore even after deletion from the `Map`, use a persistent variable instead of calling `getSemaphore` again.
 
 ### Concurrency
 
